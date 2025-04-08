@@ -1,0 +1,25 @@
+ion-tab-bar {
+  height: 90px;
+  transition: all 0.3s ease;
+  background: var(--var-home-page-background);
+}
+
+ion-tab-button {
+  background: var(--var-home-page-background);
+}
+
+ion-tab-button {
+  --color-selected: var(--var-home-page-icon-active);
+}
+
+ion-tab-button.ion-no-ripple {
+  --ripple-color: transparent;
+}
+
+ion-tab-button.tab-selected .selected-background {
+  transition: all 0.3s ease;
+  background: var(--var-home-page-icon-active-background);
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 50px;
+}
