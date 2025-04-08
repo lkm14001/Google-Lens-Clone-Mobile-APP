@@ -1,0 +1,14 @@
+/* For information on how to create your own theme, please see:
+http://ionicframework.com/docs/theming/ */
+
+:root {
+
+    /* Home Page Colors */
+    --var-home-page-background: #1f2125;
+    --var-home-page-icons: #a8c7fa;
+    --var-home-page-icon-active: #8cb6fa;
+    --var-home-page-icon-active-background: #394357;
+    --var-home-page-icon-inactive: #9ba2a5;
+
+
+}

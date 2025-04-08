@@ -1,0 +1,7 @@
+{
+  "name": "google-lens",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
