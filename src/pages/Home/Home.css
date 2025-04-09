@@ -28,7 +28,44 @@ ion-icon#flask {
     color: var(--var-home-page-icon-inactive);
 }
 
-#header-avatar {
-  height: 30px;
-  border-radius: 50px;
+.google-lens {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.google-lens-functions {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 10px;
+}
+
+@media (max-height: 800px) {
+  .homescreen-nav-icons {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  .home-content {
+    gap: 10px !important;
+    padding-top: 5px !important;
+  }
+
+  .google-lens {
+    gap: 12px;
+  }
+}
+
+@media (min-height:850px) {
+  .google-lens-functions {
+    height: 70px !important;
+  }
+}
+
+@media (min-height: 1100px) {
+  .google-lens-functions {
+    height: 100px !important;
+  }
 }

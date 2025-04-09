@@ -2,13 +2,21 @@
 http://ionicframework.com/docs/theming/ */
 
 :root {
+  /* Home Page Colors */
+  --var-home-page-background: #1f2125;
+  --var-home-page-icons: #a8c7fa;
+  --var-home-page-icon-active: #8cb6fa;
+  --var-home-page-icon-active-background: #394357;
+  --var-home-page-icon-inactive: #666a6d;
+  --var-home-page-search-bar-background: #2f3133;
 
-    /* Home Page Colors */
-    --var-home-page-background: #1f2125;
-    --var-home-page-icons: #a8c7fa;
-    --var-home-page-icon-active: #8cb6fa;
-    --var-home-page-icon-active-background: #394357;
-    --var-home-page-icon-inactive: #666a6d;
-    --var-home-page-search-bar-background: #2f3133;
-
+  /* Home Page - Google Lens Functionalities */
+  --var-google-lens-image-scan: #f3d862;
+  --var-google-lens-image-scan-background: #4d4531;
+  --var-google-lens-translate: #8eaef1;
+  --var-google-lens-translate-backgorund: #363f4e;
+  --var-google-lens-homework: #d4eadc;
+  --var-google-lens-homework-backgorund: #33423b;
+  --var-google-lens-music: #d98782;
+  --var-google-lens-music-background: #493034;
 }

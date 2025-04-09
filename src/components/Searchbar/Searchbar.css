@@ -1,11 +1,5 @@
-ion-searchbar#home-search {
-    --border-radius: 50px;
-    /* border: 1px solid white; */
-    width: 100%; 
-    --background: var(--var-home-page-search-bar-background)
-}
-
-ion-searchbar#home-search input {
-    height: 70px;
-
+@media only screen and (max-height: 800px) {
+    .home-search {
+        height: 60px !important;
+    }
 }

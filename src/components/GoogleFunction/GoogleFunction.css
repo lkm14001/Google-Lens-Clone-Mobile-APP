@@ -1,0 +1,14 @@
+.google-function {
+    padding: 15px 25px;
+    border-radius: 50px;
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.google-functions-icon {
+    width: 25px;
+    height: 25px;
+}

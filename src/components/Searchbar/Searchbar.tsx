@@ -8,9 +8,8 @@ import { HiOutlineSearch } from "react-icons/hi";
 const Searchbar = () => {
   return (
     <>
-      <Paper
+      <Box
         component={"div"}
-        elevation={0}
         sx={(them) => ({
           width: "100%",
           height: 80,
@@ -21,7 +20,9 @@ const Searchbar = () => {
           alignItems: "center",
           justifyContent: "space-between",
           boxSizing: "border-box",
+          cursor: "pointer"
         })}
+        className="home-search"
         onTouchEnd={() => console.log("hello touch")}
       >
         <Box
@@ -125,7 +126,7 @@ const Searchbar = () => {
             />
           </IconButton>
         </Box>
-      </Paper>
+      </Box>
     </>
   );
 };

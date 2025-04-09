@@ -43,6 +43,7 @@ const Tab = () => {
               disableFocusRipple
               disableRipple
               disableTouchRipple
+              className="google-tab-button"
             >
               <GoHomeFill style={{ width: "100%", height: "100%" }} />
             </IconButton>
@@ -68,6 +69,7 @@ const Tab = () => {
               disableFocusRipple
               disableRipple
               disableTouchRipple
+              className="google-tab-button"
             >
               <HiOutlineSearch style={{ width: "100%", height: "100%" }} />
             </IconButton>
@@ -93,6 +95,7 @@ const Tab = () => {
               disableFocusRipple
               disableRipple
               disableTouchRipple
+              className="google-tab-button"
             >
               <PiBookmarksSimpleBold style={{ width: "100%", height: "100%" }} />
             </IconButton>

@@ -2,6 +2,9 @@ ion-tab-bar {
   height: 90px;
   transition: all 0.3s ease;
   background: var(--var-home-page-background);
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-around;
 }
 
 ion-tab-button {
@@ -22,4 +25,21 @@ ion-tab-button.tab-selected .selected-background {
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 50px;
+}
+
+@media only screen and (max-height: 800px) {
+  ion-tab-bar {
+    height: 60px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  ion-tab-button {
+    height: 80px;
+  }
+
+  .google-tab-button {
+    height: 40px !important;
+    width: 40px !important;
+  }
 }
