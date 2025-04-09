@@ -41,6 +41,7 @@ const Searchbar = () => {
               width: 50,
               height: 50,
             })}
+            className="google-searchbar-functions"
           >
             <HiOutlineSearch
               style={{
@@ -55,6 +56,7 @@ const Searchbar = () => {
               color: "var(--var-home-page-icon-inactive)",
               fontSize: 25
             })}
+            id="google-searchbar-text"
           >
             Search
           </Typography>
@@ -94,6 +96,7 @@ const Searchbar = () => {
               width: 50,
               height: 50,
             })}
+            className="google-searchbar-functions"
           >
             <Box
               component={"img"}
@@ -112,6 +115,7 @@ const Searchbar = () => {
               width: 50,
               height: 50,
             })}
+            className="google-searchbar-functions"
           >
             <Box
               component={"img"}

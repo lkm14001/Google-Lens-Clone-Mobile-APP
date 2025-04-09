@@ -1,9 +1,14 @@
 ion-toolbar {
   --background: var(--var-home-page-background);
+  --padding-top: 20px;
 }
 
 ion-content {
   --background: var(--var-home-page-background);
+}
+
+ion-refresher {
+  padding-top: 80px;
 }
 
 ion-toolbar::part(content) {
@@ -32,7 +37,8 @@ ion-icon#flask {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+  transition: all 0.3s ease;
 }
 
 .google-lens-functions {
@@ -40,6 +46,7 @@ ion-icon#flask {
   align-items: center;
   /* justify-content: space-between; */
   gap: 10px;
+  transition: all 0.3s ease;
 }
 
 .manage_dialog_wrapper {
@@ -129,6 +136,10 @@ ion-icon#flask {
   font-size: x-small;
 }
 
+#email {
+  color: gray;
+}
+
 #manage-dialog-pfp {
   width: 28px;
   height: 28px;
@@ -143,7 +154,7 @@ ion-icon#flask {
   outline: 1px solid var(--var-dialog-content-color);
   width: 60%;
   padding: 3px 0;
-  font-size: clamp(10px, 1vw, 20px);
+  font-size: clamp(8px, 1vw, 20px);
   font-weight: 400;
 }
 
@@ -161,6 +172,15 @@ ion-icon#flask {
   gap: 30px;
 }
 
+.manage-option span {
+  font-size: clamp(10px, 1vw, 20px);
+  color: var(--var-dialog-content-color);
+}
+
+.manage-option-icon {
+  color: var(--var-dialog-content-color);
+}
+
 .manage_dialog_secondary_content {
   display: flex;
   flex-direction: column;
@@ -176,7 +196,45 @@ ion-icon#flask {
 }
 
 .manage_dialog_footer span {
-  font-size: small;
+  font-size: clamp(8px, 1vw, 20px);
+  color: var(--var-dialog-content-color);
+}
+
+.home_data-grid {
+  padding: 15px;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 512px), 1fr));
+  gap: 20px;
+  background: linear-gradient(0deg, rgba(0,0,0,1) 90%, rgba(28,34,39,1) 100%);
+}
+
+@media (max-width: 360px) {
+  .google-lens {
+    gap: 5px;
+  }
+  .google-lens-functions {
+    gap: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  #manage-dialog-heading {
+    font-size: 30px;
+  }
+
+  #user-details span {
+    font-size: 13px;
+  }
+  .manage_dialog_header  {
+    font-size: 10px;
+  }
+  .manage_dialog_box span{
+    font-size: 15px;
+  }
+  .manage_dialog_footer span {
+    font-size: 10px;
+  }
 }
 
 @media (max-height: 800px) {
@@ -187,7 +245,7 @@ ion-icon#flask {
 
   .home-content {
     gap: 10px !important;
-    padding-top: 5px !important;
+    padding-top: 3px !important;
   }
 
   .google-lens {
@@ -210,5 +268,21 @@ ion-icon#flask {
 @media (min-width: 650px) and (max-width: 1300px) {
   .manage_dialog_box {
     width: 40%;
+  }
+}
+
+@media (max-height: 600px) {
+  .manage_dialog_box {
+    height: 92%;
+    overflow: scroll;
+    scrollbar-width: none;
+  }
+}
+
+@media (max-height: 800px) {
+  .manage_dialog_box {
+    height: 82%;
+    overflow: scroll;
+    scrollbar-width: none;
   }
 }
