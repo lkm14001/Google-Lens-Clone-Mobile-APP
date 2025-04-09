@@ -17,7 +17,6 @@ const GoogleFunction = ({
   googleFunction,
   color,
   background,
-  key
 }: GoogleFunctionProps) => {
   return (
     <Box
@@ -26,7 +25,6 @@ const GoogleFunction = ({
       sx={(theme) => ({
         backgroundColor: background,
       })}
-      key={key}
     >
       {googleFunction === "imageScan" && (
         <MdImageSearch className="google-functions-icon" style={{ color }} />

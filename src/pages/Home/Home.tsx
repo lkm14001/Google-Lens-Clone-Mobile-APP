@@ -3,7 +3,10 @@ import {
   IonHeader,
   IonIcon,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonToolbar,
+  RefresherEventDetail,
 } from "@ionic/react";
 import { flaskSharp } from "ionicons/icons";
 import { CgBell } from "react-icons/cg";
@@ -14,13 +17,14 @@ import {
   Avatar,
   Box,
   Button,
+  Divider,
   IconButton,
   Modal,
   Typography,
 } from "@mui/material";
 import Searchbar from "../../components/Searchbar/Searchbar";
 
-import { GOOGLE_FUNCTIONS } from "../../util/constants";
+import { GOOGLE_FUNCTIONS, NEWS } from "../../util/constants";
 import GoogleFunction from "../../components/GoogleFunction/GoogleFunction";
 import { useState } from "react";
 
@@ -41,11 +45,19 @@ import { TbHelp } from "react-icons/tb";
 import { MdNoAccounts } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa6";
 import { FaUserCog } from "react-icons/fa";
+import NewsCard from "../../components/NewsCard/NewsCard";
 
 const Home: React.FC = () => {
   const [isManageDialogOpen, setManageDialogOpen] = useState<boolean>(false);
   const [isManageAccordionOpen, setManageAccordionOpen] =
     useState<boolean>(false);
+
+  const handleRefresh = (e: CustomEvent<RefresherEventDetail>) => {
+    setTimeout(() => {
+      console.log("refreshed");
+      e.detail.complete();
+    }, 1500);
+  };
 
   return (
     <IonPage>
@@ -89,12 +101,29 @@ const Home: React.FC = () => {
             </Box>
           </IonToolbar>
         </IonHeader>
+        <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         <Modal
           open={isManageDialogOpen}
-          onClose={() => setManageDialogOpen(false)}
+          onClose={() => {
+            setManageAccordionOpen(false);
+            setManageDialogOpen(false);
+          }}
         >
-          <Box component="div" className="manage_dialog_wrapper">
-            <Box component="div" className="manage_dialog_box">
+          <Box
+            component="div"
+            className="manage_dialog_wrapper"
+            onClick={() => {
+              setManageAccordionOpen(false);
+              setManageDialogOpen(false);
+            }}
+          >
+            <Box
+              component="div"
+              className="manage_dialog_box"
+              onClick={(e) => e.stopPropagation()}
+            >
               <Box component="div" className="manage_dialog_header">
                 <IconButton
                   aria-label="close-manage-dialog"
@@ -119,7 +148,7 @@ const Home: React.FC = () => {
                         <Typography component={"span"}>
                           Leela Krishna
                         </Typography>
-                        <Typography component={"span"}>
+                        <Typography component={"span"} id="email">
                           krishnaleela35@gmail.com
                         </Typography>
                       </Box>
@@ -241,7 +270,7 @@ const Home: React.FC = () => {
           sx={(theme) => ({
             display: "flex",
             flexDirection: "column",
-            gap: 5,
+            gap: 2,
             paddingTop: 2,
             paddingX: 3,
             boxSizing: "border-box",
@@ -266,7 +295,7 @@ const Home: React.FC = () => {
               component={"div"}
               sx={(theme) => ({
                 width: "100%",
-                height: 50,
+                // height: 50,
               })}
               className="google-lens-functions"
             >
@@ -280,6 +309,20 @@ const Home: React.FC = () => {
               ))}
             </Box>
           </Box>
+        </Box>
+        <Divider
+          variant="fullWidth"
+          sx={{
+            width: "100%",
+            backgroundColor: "gray",
+            height: "0.5px",
+            marginTop: "10px",
+          }}
+        />
+        <Box component={"div"} className="home_data-grid">
+          {NEWS.map((ele, index) => (
+            <NewsCard sourceName={ele.source.name} thumbnail={ele.urlToImage || ""} title={ele.title} key={index} />
+          ))}
         </Box>
       </IonContent>
     </IonPage>
