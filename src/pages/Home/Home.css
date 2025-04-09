@@ -25,14 +25,14 @@ ion-icon#flask {
 }
 
 #notification-bell {
-    color: var(--var-home-page-icon-inactive);
+  color: var(--var-home-page-icon-inactive);
 }
 
 .google-lens {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
 }
 
 .google-lens-functions {
@@ -40,6 +40,143 @@ ion-icon#flask {
   align-items: center;
   /* justify-content: space-between; */
   gap: 10px;
+}
+
+.manage_dialog_wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.manage_dialog_box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+  /* height: 85%; */
+  background: var(--var-dialog-box-background);
+  border-radius: 25px;
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.manage_dialog_header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.manage_dialog_header #manage-dialog-close-button {
+  width: 30;
+  height: 30;
+  color: var(--var-dialog-content-color);
+}
+
+#manage-dialog-heading {
+  flex: 1;
+  color: var(--var-dialog-content-color);
+  text-align: center;
+  font-weight: bold;
+  font-size: clamp(20px, 1.2vw, 30px);
+  padding-right: 40px;
+}
+
+.manage_dialog_content {
+  background: var(--var-dialog-content-backgorund);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 25px;
+  padding: 10px 5px;
+  transition: all 0.3s ease;
+}
+
+.manage_sections {
+  border-bottom: 2px solid var(--var-dialog-box-background);
+}
+
+.manage_dialog_content span {
+  color: var(--var-dialog-content-color);
+}
+
+.manage_dialog_accordion {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  align-items: center;
+}
+
+.manage_dialog_accordion #user-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.manage_dialog_accordion #user-section #user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+#user-details span {
+  font-size: x-small;
+}
+
+#manage-dialog-pfp {
+  width: 28px;
+  height: 28px;
+}
+
+#accordion_icon {
+  color: var(--var-dialog-content-color);
+}
+
+#manage_button {
+  color: var(--var-dialog-content-color);
+  outline: 1px solid var(--var-dialog-content-color);
+  width: 60%;
+  padding: 3px 0;
+  font-size: clamp(10px, 1vw, 20px);
+  font-weight: 400;
+}
+
+.manage-options-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-bottom: none;
+}
+
+.manage-option {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.manage_dialog_secondary_content {
+  display: flex;
+  flex-direction: column;
+  /* gap: 5px; */
+}
+
+.manage_dialog_footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding-top: 20px;
+}
+
+.manage_dialog_footer span {
+  font-size: small;
 }
 
 @media (max-height: 800px) {
@@ -58,7 +195,7 @@ ion-icon#flask {
   }
 }
 
-@media (min-height:850px) {
+@media (min-height: 850px) {
   .google-lens-functions {
     height: 70px !important;
   }
@@ -66,6 +203,12 @@ ion-icon#flask {
 
 @media (min-height: 1100px) {
   .google-lens-functions {
-    height: 100px !important;
+    /* height: 100px !important; */
+  }
+}
+
+@media (min-width: 650px) and (max-width: 1300px) {
+  .manage_dialog_box {
+    width: 40%;
   }
 }
