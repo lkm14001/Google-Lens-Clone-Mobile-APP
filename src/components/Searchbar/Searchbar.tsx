@@ -37,7 +37,6 @@ const Searchbar = () => {
             aria-label="Search google"
             //   onClick={}
             disableFocusRipple
-            disableRipple
             sx={(theme) => ({
               width: 50,
               height: 50,
@@ -91,7 +90,6 @@ const Searchbar = () => {
             aria-label="Microphone !"
             //   onClick={}
             disableFocusRipple
-            disableRipple
             sx={(theme) => ({
               width: 50,
               height: 50,
@@ -110,7 +108,6 @@ const Searchbar = () => {
             aria-label="Google Lens"
             //   onClick={}
             disableFocusRipple
-            disableRipple
             sx={(theme) => ({
               width: 50,
               height: 50,

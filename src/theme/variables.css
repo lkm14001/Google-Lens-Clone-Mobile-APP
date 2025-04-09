@@ -19,4 +19,9 @@ http://ionicframework.com/docs/theming/ */
   --var-google-lens-homework-backgorund: #33423b;
   --var-google-lens-music: #d98782;
   --var-google-lens-music-background: #493034;
+
+  /* Home Page - Manage Dialog */
+  --var-dialog-box-background: #2d3740;
+  --var-dialog-content-backgorund: #1c2227;
+  --var-dialog-content-color: #e8eaee;
 }
