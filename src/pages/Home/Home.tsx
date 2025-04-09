@@ -19,16 +19,19 @@ import PFP from "../../../assets/Google__G__logo.svg.webp";
 import { Avatar, Box, Typography } from "@mui/material";
 import Searchbar from "../../components/Searchbar/Searchbar";
 
-import { GoHomeFill } from "react-icons/go";
-import { Route } from "react-router-dom";
+import { GOOGLE_FUNCTIONS } from "../../util/constants";
+import GoogleFunction from "../../components/GoogleFunction/GoogleFunction";
 
 const Home: React.FC = () => {
+  const DEVICE_WIDTH = window.innerWidth;
+  const DEVICE_HEIGHT = window.innerHeight;
+  console.log(DEVICE_WIDTH, DEVICE_HEIGHT);
   return (
     <IonPage>
       <IonContent fullscreen>
         <IonHeader className="ion-no-border ion-padding-top">
           <IonToolbar>
-            <IonIcon icon={flaskSharp} size="large" role="button" id="flask" />
+            <IonIcon icon={flaskSharp} size="large" role="button" id="flask" className="homescreen-nav-icons"/>
             <Box
               sx={(theme) => ({
                 display: "flex",
@@ -36,8 +39,16 @@ const Home: React.FC = () => {
                 alignItems: "center",
               })}
             >
-              <CgBell size={30} id="notification-bell" />
-              <Avatar src={PFP} sx={{ width: 30, height: 30 }} />
+              <CgBell size={30} id="notification-bell" className="homescreen-nav-icons" />
+              <Avatar
+                src={PFP}
+                sx={(theme) => ({
+                  width: 30,
+                  height: 30,
+                })}
+                id="user-avatar"
+                className="homescreen-nav-icons"
+              />
             </Box>
           </IonToolbar>
         </IonHeader>
@@ -53,17 +64,33 @@ const Home: React.FC = () => {
             width: "100%",
             alignItems: "center",
           })}
+          className="home-content"
         >
           <Typography
             sx={(theme) => ({
               color: "white",
-              fontSize: 55,
+              fontSize: `clamp(45px, 1.2vw, 60px)`,
               fontWeight: "bold",
             })}
+            className="home-title"
           >
             Google
           </Typography>
-          <Searchbar />
+          <Box component="div" className="google-lens">
+            <Searchbar />
+            <Box
+              component={"div"}
+              sx={(theme) => ({
+                width: "100%",
+                height: 50,
+              })}
+              className="google-lens-functions"
+            >
+              {GOOGLE_FUNCTIONS.map((ele,index) => (
+                <GoogleFunction color={ele.color} background={ele.background} googleFunction={ele.googleFunction} key={index}/>
+              ))}
+            </Box>
+          </Box>
         </Box>
       </IonContent>
     </IonPage>
