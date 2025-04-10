@@ -32,15 +32,12 @@ const Tab = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Route path={"/home"}>
+        <Route path={"/tabs/home"}>
           <Home openSearchModal={openModal} />
-        </Route>
-        <Route exact path="/">
-          <Redirect to={"/home"} />
         </Route>
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
-        <IonTabButton tab="home" href="/home" className="ion-no-ripple">
+        <IonTabButton tab="home" href="/tabs/home" className="ion-no-ripple">
           <Box component="div" className="selected-background">
             <IconButton
               sx={{

@@ -28,4 +28,8 @@ http://ionicframework.com/docs/theming/ */
   /* Search page */
   --var-trending-search-icon-background: #262828;
   --var-trending-search-content-color: #979999;
+
+  /* Listen page */
+  --var-listen-page-background: #1e1e1e;
+  --var-listen-page-content: #9699a0;
 }

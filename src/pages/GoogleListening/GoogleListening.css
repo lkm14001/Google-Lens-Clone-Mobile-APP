@@ -1,0 +1,42 @@
+.listening_wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 100px 30px;
+  background: var(--var-listen-page-background);
+}
+
+.microphone_animation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 150px;
+}
+
+.mic-instruction {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.google-listen {
+  width: 200px;
+  height: 100px;
+}
+
+.google-mic {
+    width: 120px;
+    height: 100px;
+}
+
+.instruction-text {
+  font-size: 30px !important;
+  font-weight: bold !important;
+  color: var(--var-listen-page-content) !important;
+}
+
+.google-speak {
+    width: 150px;
+    height: 150px;
+}
