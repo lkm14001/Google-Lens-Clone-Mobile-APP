@@ -140,22 +140,6 @@ const NEWS = [
   },
   {
     source: {
-      id: null,
-      name: "Heat.com",
-    },
-    author: null,
-    title:
-      "Pool Report on the Technical Fouls called during Tonight’s Lakers at Thunder Game - Official NBA",
-    description:
-      "The Pool Report interview was conducted by Cliff Brunt, Associated Press with Crew Chief Tony Brothers following today’s Lakers at Thunder game.   April 8, 2025   QUESTION: Why was Luka Dončić assessed his first technical foul by J.T. Orr? BROTHERS:  He direc…",
-    url: "https://official.nba.com/pool-report-on-the-technical-fouls-called-during-tonights-lakers-at-thunder-game/",
-    urlToImage: null,
-    publishedAt: "2025-04-09T03:13:18Z",
-    content:
-      "The Pool Report interview was conducted by Cliff Brunt, Associated Press with Crew Chief Tony Brothers following todays Lakers at Thunder game. \r\nApril 8, 2025\r\nQUESTION: Why was Luka Doni assessed h… [+497 chars]",
-  },
-  {
-    source: {
       id: "the-wall-street-journal",
       name: "The Wall Street Journal",
     },

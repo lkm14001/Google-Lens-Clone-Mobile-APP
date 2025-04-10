@@ -26,7 +26,7 @@ import Searchbar from "../../components/Searchbar/Searchbar";
 
 import { GOOGLE_FUNCTIONS, NEWS } from "../../util/constants";
 import GoogleFunction from "../../components/GoogleFunction/GoogleFunction";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { IoMdClose } from "react-icons/io";
 import { BiCaretDownCircle } from "react-icons/bi";
@@ -46,8 +46,13 @@ import { MdNoAccounts } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa6";
 import { FaUserCog } from "react-icons/fa";
 import NewsCard from "../../components/NewsCard/NewsCard";
+import Search from "../Search/Search";
 
-const Home: React.FC = () => {
+interface HomeProps {
+  openSearchModal: () => void;
+}
+
+const Home: React.FC<HomeProps> = ({ openSearchModal }) => {
   const [isManageDialogOpen, setManageDialogOpen] = useState<boolean>(false);
   const [isManageAccordionOpen, setManageAccordionOpen] =
     useState<boolean>(false);
@@ -137,7 +142,7 @@ const Home: React.FC = () => {
                 <Box component={"div"} className="manage_sections">
                   <Box
                     component="div"
-                    className="manage_dialog_accordion"
+                    className="manage_dialog_accordion ripple"
                     onClick={() =>
                       setManageAccordionOpen(!isManageAccordionOpen)
                     }
@@ -290,7 +295,7 @@ const Home: React.FC = () => {
             Google
           </Typography>
           <Box component="div" className="google-lens">
-            <Searchbar />
+            <Searchbar openModal={openSearchModal} />
             <Box
               component={"div"}
               sx={(theme) => ({
@@ -321,7 +326,12 @@ const Home: React.FC = () => {
         />
         <Box component={"div"} className="home_data-grid">
           {NEWS.map((ele, index) => (
-            <NewsCard sourceName={ele.source.name} thumbnail={ele.urlToImage || ""} title={ele.title} key={index} />
+            <NewsCard
+              sourceName={ele.source.name}
+              thumbnail={ele.urlToImage || ""}
+              title={ele.title}
+              key={index}
+            />
           ))}
         </Box>
       </IonContent>

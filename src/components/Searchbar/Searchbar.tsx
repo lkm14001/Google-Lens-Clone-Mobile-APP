@@ -4,8 +4,20 @@ import "./Searchbar.css";
 import MIC from "../../../assets/google-mic.png";
 import LENS from "../../../assets/google-lens.png";
 import { HiOutlineSearch } from "react-icons/hi";
+import { useIonRouter } from "@ionic/react";
+import Search from "../../pages/Search/Search";
 
-const Searchbar = () => {
+const Searchbar = ({openModal}: any) => {
+  const handleGoogleFunctions = (func: string) => {
+    if (func === "mic") {
+    }
+
+    if (func === "lens") {
+    }
+  };
+
+
+
   return (
     <>
       <Box
@@ -20,10 +32,11 @@ const Searchbar = () => {
           alignItems: "center",
           justifyContent: "space-between",
           boxSizing: "border-box",
-          cursor: "pointer"
+          cursor: "pointer",
         })}
         className="home-search"
-        onTouchEnd={() => console.log("hello touch")}
+        // id="google-search-open-modal"
+        onClick={openModal}
       >
         <Box
           component="div"
@@ -32,14 +45,15 @@ const Searchbar = () => {
             // gap: 2,
             alignItems: "center",
           })}
+          id="google-functionalities"
         >
           <IconButton
             aria-label="Search google"
-            //   onClick={}
             disableFocusRipple
             sx={(theme) => ({
               width: 50,
               height: 50,
+              zIndex: 10,
             })}
             className="google-searchbar-functions"
           >
@@ -54,32 +68,13 @@ const Searchbar = () => {
           <Typography
             sx={(theme) => ({
               color: "var(--var-home-page-icon-inactive)",
-              fontSize: 25
+              fontSize: 25,
             })}
             id="google-searchbar-text"
           >
             Search
           </Typography>
         </Box>
-
-        {/* for later use */}
-        {/* Use the below input base in opened modal */}
-        {/* <InputBase
-          sx={(them) => ({
-            flex: 1,
-            // border: '1px solid white',
-            height: "100%",
-            fontSize: 30,
-          })}
-          inputProps={{
-            style: {
-              color: 'white',
-              // fontWeight: ''
-            }
-          }}
-          placeholder="Search"
-        /> */}
-
         <Box
           component="div"
           sx={(theme) => ({
@@ -90,7 +85,11 @@ const Searchbar = () => {
         >
           <IconButton
             aria-label="Microphone !"
-            //   onClick={}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleGoogleFunctions("mic");
+            }}
             disableFocusRipple
             sx={(theme) => ({
               width: 50,
@@ -109,7 +108,11 @@ const Searchbar = () => {
           </IconButton>
           <IconButton
             aria-label="Google Lens"
-            //   onClick={}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleGoogleFunctions("lens");
+            }}
             disableFocusRipple
             sx={(theme) => ({
               width: 50,

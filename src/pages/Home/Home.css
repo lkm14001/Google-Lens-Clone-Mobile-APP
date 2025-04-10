@@ -285,4 +285,7 @@ ion-icon#flask {
     overflow: scroll;
     scrollbar-width: none;
   }
+  .google-lens {
+    gap: 10px;
+  }
 }

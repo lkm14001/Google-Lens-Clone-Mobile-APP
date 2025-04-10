@@ -24,4 +24,8 @@ http://ionicframework.com/docs/theming/ */
   --var-dialog-box-background: #2d3740;
   --var-dialog-content-backgorund: #1c2227;
   --var-dialog-content-color: #e8eaee;
+
+  /* Search page */
+  --var-trending-search-icon-background: #262828;
+  --var-trending-search-content-color: #979999;
 }

@@ -1,0 +1,82 @@
+.google-search-screen-wrapper {
+  background: var(--var-home-page-background);
+  padding-top: 29px;
+  height: 100dvh;
+}
+
+.google-search-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.google-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-button {
+  color: var(--var-dialog-content-color);
+  width: 30px;
+  height: 30px;
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  font-size: 20px;
+}
+
+.google-searchbar-functions img {
+  width: 30px;
+  height: 30px;
+}
+
+.divider {
+  background-color: var(--var-home-page-icon-inactive);
+  height: 0.5px;
+  width: 95%;
+
+}
+
+.trending-searches {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.trending-searches-list {
+  display: flex;
+  flex-direction: column;
+  /* padding-left: 15px; */
+  width: 100%;
+  gap: 10px;
+}
+
+.trending-individual-search {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 15px;
+}
+
+.trending-icon-wrapper {
+  background-color: var(--var-trending-search-icon-background) !important;
+  /* padding: 3px !important; */
+}
+
+.trending-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--var-trending-search-content-color);
+}
+
+.trending-searches span {
+  color: var(--var-trending-search-content-color);
+  font-size: 15px;
+  font-weight: bold;
+}
