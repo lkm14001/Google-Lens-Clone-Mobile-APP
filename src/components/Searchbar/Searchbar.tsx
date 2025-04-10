@@ -7,16 +7,18 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { useIonRouter } from "@ionic/react";
 import Search from "../../pages/Search/Search";
 
-const Searchbar = ({openModal}: any) => {
+const Searchbar = ({ openModal }: any) => {
+  const router = useIonRouter();
   const handleGoogleFunctions = (func: string) => {
     if (func === "mic") {
+      console.log("MIC");
+      router.push("/listen", "back");
     }
 
     if (func === "lens") {
+      console.log("LENS");
     }
   };
-
-
 
   return (
     <>

@@ -1,5 +1,10 @@
 import { Redirect, Route } from "react-router-dom";
-import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
+import {
+  IonApp,
+  IonRouterOutlet,
+  setupIonicReact,
+  IonRoute,
+} from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home/Home";
 
@@ -33,15 +38,17 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import Tab from "./components/Tabbar/Tab";
+import GoogleListening from "./pages/GoogleListening/GoogleListening";
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route path="/" component={Tab}/>
-      </IonRouterOutlet>
+      <Route path="/tabs" component={Tab} />
+      <Route path="/listen" component={GoogleListening} />
+
+      <Redirect exact  from="/" to="/tabs/home" />
     </IonReactRouter>
   </IonApp>
 );

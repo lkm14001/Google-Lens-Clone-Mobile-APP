@@ -259,12 +259,6 @@ ion-icon#flask {
   }
 }
 
-@media (min-height: 1100px) {
-  .google-lens-functions {
-    /* height: 100px !important; */
-  }
-}
-
 @media (min-width: 650px) and (max-width: 1300px) {
   .manage_dialog_box {
     width: 40%;
