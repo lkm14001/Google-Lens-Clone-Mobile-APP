@@ -1,7 +1,7 @@
 .google-search-screen-wrapper {
   background: var(--var-home-page-background);
   padding-top: 29px;
-  height: 100dvh;
+  height: 100%;
 }
 
 .google-search-bar-wrapper {

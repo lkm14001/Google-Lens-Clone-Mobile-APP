@@ -5,7 +5,6 @@ import MIC from "../../../assets/google-mic.png";
 import LENS from "../../../assets/google-lens.png";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useIonRouter } from "@ionic/react";
-import Search from "../../pages/Search/Search";
 
 const Searchbar = ({ openModal }: any) => {
   const router = useIonRouter();

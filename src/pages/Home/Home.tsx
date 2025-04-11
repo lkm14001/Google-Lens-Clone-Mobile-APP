@@ -46,7 +46,6 @@ import { MdNoAccounts } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa6";
 import { FaUserCog } from "react-icons/fa";
 import NewsCard from "../../components/NewsCard/NewsCard";
-import Search from "../Search/Search";
 
 interface HomeProps {
   openSearchModal: () => void;

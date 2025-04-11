@@ -16,14 +16,14 @@ import { HiTrendingUp } from "react-icons/hi";
 import MIC from "../../../assets/google-mic.png";
 import LENS from "../../../assets/google-lens.png";
 
-import "./Search.css";
+import "./SearchModal.css";
 
 interface SearchProps {
   closeModal: () => void;
   ref: React.RefObject<HTMLIonModalElement | null>;
 }
 
-const Search = ({ closeModal, ref }: SearchProps) => {
+const SearchModal = ({ closeModal, ref }: SearchProps) => {
   const InputRef = useRef<HTMLInputElement | null>(null);
   const router = useIonRouter();
 
@@ -198,4 +198,4 @@ const Search = ({ closeModal, ref }: SearchProps) => {
   );
 };
 
-export default Search;
+export default SearchModal;
