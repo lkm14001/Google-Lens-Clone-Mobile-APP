@@ -32,4 +32,11 @@ http://ionicframework.com/docs/theming/ */
   /* Listen page */
   --var-listen-page-background: #1e1e1e;
   --var-listen-page-content: #9699a0;
+
+  /* Search Page  */
+  --var-search-page-background: #1f2124;
+  --var-search-page-content-inactive: #8d8f8f;
+  --var-search-page-content-active: #f3f3f3;
+  --var-search-page-search-bar-background: #313235;
+  --var-search-page-search-bar-border: #6d6c6c;
 }

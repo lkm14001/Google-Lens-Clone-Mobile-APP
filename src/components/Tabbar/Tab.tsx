@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   IonRouterOutlet,
   IonTabBar,
@@ -6,7 +6,7 @@ import {
   IonTabs,
   IonModal,
 } from "@ionic/react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, useHistory } from "react-router-dom";
 import Home from "../../pages/Home/Home";
 
 import { GoHomeFill } from "react-icons/go";
@@ -20,9 +20,23 @@ import SearchModal from "../../pages/SearchModal/SearchModal";
 
 const Tab = () => {
   const IonModalRef = useRef<HTMLIonModalElement>(null);
+  const [searchText, setSearchText] = useState<string>("");
+  const history = useHistory();
 
   const openModal = () => {
+    window.history.pushState({}, "", "/search-modal"); //pushing dummy route to fake the routing (because when back is pressed the modal closes and home page stays which leads to app exit) which gives the browser to think we are on a new seperate route.
+    //so clicking back goes to /tabs/home again clicking back exits app
     IonModalRef.current?.present();
+  };
+
+  const searchTabClick = () => {
+    if (searchText.length > 0) {
+      history.push(`/search?query=${encodeURIComponent(searchText)}`, {
+        searchText,
+      });
+    } else {
+      openModal();
+    }
   };
 
   const closeModal = () => {
@@ -60,7 +74,7 @@ const Tab = () => {
         <IonTabButton
           tab="search"
           className="ion-no-ripple"
-          onClick={openModal} // Open modal when "Search" tab is clicked
+          onClick={searchTabClick} // Open modal when "Search" tab is clicked
         >
           <Box component="div" className="selected-background">
             <IconButton
@@ -106,7 +120,12 @@ const Tab = () => {
       </IonTabBar>
 
       {/* Centralized Modal */}
-      <SearchModal ref={IonModalRef} closeModal={closeModal} />
+      <SearchModal
+        ref={IonModalRef}
+        closeModal={closeModal}
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
     </IonTabs>
   );
 };

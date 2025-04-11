@@ -39,18 +39,41 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import Tab from "./components/Tabbar/Tab";
 import GoogleListening from "./pages/GoogleListening/GoogleListening";
+import SearchPage from "./pages/SearchPage/SearchPage";
+import { useEffect } from "react";
+
+import { App as CapApp } from "@capacitor/app";
+import { PluginListenerHandle } from "@capacitor/core";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <Route path="/tabs" component={Tab} />
-      <Route path="/listen" component={GoogleListening} />
+const App: React.FC = () => {
+  useEffect(() => {
+    let handler: PluginListenerHandle;
+    const handleExit = async () => {
+      handler = await CapApp.addListener("backButton", () => {
+        if (window.location.pathname === "/tabs/home") {
+          CapApp.exitApp();
+        } else {
+          window.history.back();
+        }
+      });
+    };
+    handleExit();
+  }, []);
 
-      <Redirect exact  from="/" to="/tabs/home" />
-    </IonReactRouter>
-  </IonApp>
-);
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <Route path="/tabs" component={Tab} />
+        <Route path="/listen" component={GoogleListening} />
+        <Route path="/search" component={SearchPage} />
+
+        <Redirect exact from="/" to="/tabs/home" />
+        <Redirect exact from="/tabs" to="/tabs/home" />
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;

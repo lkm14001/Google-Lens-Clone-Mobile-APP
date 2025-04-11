@@ -21,25 +21,23 @@ import "./SearchModal.css";
 interface SearchProps {
   closeModal: () => void;
   ref: React.RefObject<HTMLIonModalElement | null>;
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SearchModal = ({ closeModal, ref }: SearchProps) => {
+const SearchModal = ({
+  closeModal,
+  ref,
+  searchText,
+  setSearchText,
+}: SearchProps) => {
   const InputRef = useRef<HTMLInputElement | null>(null);
   const router = useIonRouter();
 
   const handleTabChange = () => {
-    // ref?.current?.dismiss();
     router.push("/", "forward", "push");
     closeModal();
   };
-
-  useEffect(() => {
-    const inputTimeout = setTimeout(() => {
-      InputRef?.current?.focus();
-    }, 100);
-
-    return () => clearTimeout(inputTimeout);
-  }, []);
 
   return (
     <IonModal ref={ref}>
@@ -51,6 +49,7 @@ const SearchModal = ({ closeModal, ref }: SearchProps) => {
             </IconButton>
             <InputBase
               inputRef={InputRef}
+              type="text"
               autoFocus
               inputProps={{
                 style: {
@@ -58,8 +57,19 @@ const SearchModal = ({ closeModal, ref }: SearchProps) => {
                   // fontWeight: ''
                 },
               }}
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
               placeholder="Search"
               className="search-input"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  closeModal();
+                  router.push(
+                    `/search?query=${encodeURIComponent(searchText)}`,
+                    "forward"
+                  );
+                }
+              }}
             />
             <Box
               component="div"
@@ -113,84 +123,21 @@ const SearchModal = ({ closeModal, ref }: SearchProps) => {
         <Box component="div" className="trending-searches">
           <Typography component={"span"}>Trending searches</Typography>
           <Box component="div" className="trending-searches-list">
-            <Box component="div" className="trending-individual-search">
-              <IconButton
-                disableFocusRipple
-                disableRipple
-                disableTouchRipple
-                className="trending-icon-wrapper"
-              >
-                <HiTrendingUp className="trending-icon" />
-              </IconButton>
-              <Typography component={"span"}>
-                Hello This is leela krishna
-              </Typography>
-            </Box>
-            <Box component="div" className="trending-individual-search">
-              <IconButton
-                disableFocusRipple
-                disableRipple
-                disableTouchRipple
-                className="trending-icon-wrapper"
-              >
-                <HiTrendingUp className="trending-icon" />
-              </IconButton>
-              <Typography component={"span"}>
-                Hello This is leela krishna
-              </Typography>
-            </Box>
-            <Box component="div" className="trending-individual-search">
-              <IconButton
-                disableFocusRipple
-                disableRipple
-                disableTouchRipple
-                className="trending-icon-wrapper"
-              >
-                <HiTrendingUp className="trending-icon" />
-              </IconButton>
-              <Typography component={"span"}>
-                Hello This is leela krishna
-              </Typography>
-            </Box>
-            <Box component="div" className="trending-individual-search">
-              <IconButton
-                disableFocusRipple
-                disableRipple
-                disableTouchRipple
-                className="trending-icon-wrapper"
-              >
-                <HiTrendingUp className="trending-icon" />
-              </IconButton>
-              <Typography component={"span"}>
-                Hello This is leela krishna
-              </Typography>
-            </Box>
-            <Box component="div" className="trending-individual-search">
-              <IconButton
-                disableFocusRipple
-                disableRipple
-                disableTouchRipple
-                className="trending-icon-wrapper"
-              >
-                <HiTrendingUp className="trending-icon" />
-              </IconButton>
-              <Typography component={"span"}>
-                Hello This is leela krishna
-              </Typography>
-            </Box>
-            <Box component="div" className="trending-individual-search">
-              <IconButton
-                disableFocusRipple
-                disableRipple
-                disableTouchRipple
-                className="trending-icon-wrapper"
-              >
-                <HiTrendingUp className="trending-icon" />
-              </IconButton>
-              <Typography component={"span"}>
-                Hello This is leela krishna
-              </Typography>
-            </Box>
+            {[...Array(10).keys()].map((ele) => (
+              <Box component="div" className="trending-individual-search">
+                <IconButton
+                  disableFocusRipple
+                  disableRipple
+                  disableTouchRipple
+                  className="trending-icon-wrapper"
+                >
+                  <HiTrendingUp className="trending-icon" />
+                </IconButton>
+                <Typography component={"span"}>
+                  Hello This is leela krishna
+                </Typography>
+              </Box>
+            ))}
           </Box>
         </Box>
       </Box>
