@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import listening from "../../../assets/google-listening.gif";
 import speak from "../../../assets/ZChAX.gif";
@@ -8,12 +8,15 @@ import MIC from "../../../assets/google-mic.png";
 import "./GoogleListening.css";
 import { Typography } from "@mui/material";
 
-import { Capacitor } from "@capacitor/core";
+import { Capacitor, CapacitorException } from "@capacitor/core";
 import { SpeechRecognition as CapacitorSpeech } from "@capacitor-community/speech-recognition";
 import { Preferences } from "@capacitor/preferences";
+import { useHistory } from "react-router-dom";
+import { useIonRouter } from "@ionic/react";
 
 const GoogleListening = () => {
   const SPEECH_PERMISSION = "isSpeechGranted";
+  const history = useHistory();
   const [isNativePlatform] = useState<boolean>(Capacitor.isNativePlatform);
   const [speechRecognitionStarted, setSpeechRecognitionStarted] =
     useState<boolean>(true);
@@ -93,33 +96,39 @@ const GoogleListening = () => {
       }
 
       const handleCapSpeech = async () => {
-        if (await CapacitorSpeech.isListening()) {
-          setInstruction("Listening...");
-        } else {
-          await CapacitorSpeech.stop();
-          setSpeechRecognitionStarted(false);
-          setInstruction("Something went wrong! Please try again later...");
-        }
-        const text: SpeechRecognitionResult = await CapacitorSpeech.start({
-          language: "en-US",
-          maxResults: 1,
-        });
-        if (
-          text.status === "success" &&
-          text.matches &&
-          text.matches.length > 0
-        ) {
-          setSpeechRecognitionStarted(false);
-          setSearchString(text.matches[0]);
-          await CapacitorSpeech.stop();
-
-          // Route to /search and open modal with the search string in text input and results from an api
-        } else {
-          await CapacitorSpeech.stop();
-          setSpeechRecognitionStarted(false);
-          setInstruction(
-            "Tap the mic, then speack into your device for quick answers"
-          );
+        if (speechRecognitionStarted) {
+          try {
+            const text: SpeechRecognitionResult = await CapacitorSpeech.start({
+              language: "en-US",
+              maxResults: 1,
+            });
+            if (
+              text.status === "success" &&
+              text.matches &&
+              text.matches.length > 0
+            ) {
+              setSpeechRecognitionStarted(false);
+              setInstruction(text.matches[0]);
+              setTimeout(() => {
+                history.push("/tabs/home", {
+                  searchText: text.matches && text.matches[0],
+                });
+              }, 500);
+              await CapacitorSpeech.stop();
+              // Route to /search with the search string in text input (not modal - results page) and results from an api
+            }
+          } catch (error) {
+            if (
+              error instanceof CapacitorException &&
+              error.message === "No match"
+            ) {
+              setSpeechRecognitionStarted(false);
+              setInstruction(
+                "Tap the mic, then speack into your device for quick answers"
+              );
+              await CapacitorSpeech.stop();
+            }
+          }
         }
       };
       handleCapSpeech();

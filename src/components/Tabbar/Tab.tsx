@@ -16,7 +16,7 @@ import { PiBookmarksSimpleBold } from "react-icons/pi";
 import { Box, IconButton, Typography } from "@mui/material";
 
 import "./Tab.css";
-import Search from "../../pages/Search/Search";
+import SearchModal from "../../pages/SearchModal/SearchModal";
 
 const Tab = () => {
   const IonModalRef = useRef<HTMLIonModalElement>(null);
@@ -106,7 +106,7 @@ const Tab = () => {
       </IonTabBar>
 
       {/* Centralized Modal */}
-      <Search ref={IonModalRef} closeModal={closeModal} />
+      <SearchModal ref={IonModalRef} closeModal={closeModal} />
     </IonTabs>
   );
 };

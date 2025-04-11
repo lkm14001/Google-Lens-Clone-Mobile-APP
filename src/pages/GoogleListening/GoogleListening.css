@@ -21,19 +21,20 @@
 }
 
 .google-listen {
-  width: 200px;
-  height: 100px;
+  width: 120px;
+  height: 80px;
 }
 
 .google-mic {
-    width: 120px;
-    height: 100px;
+    width: 100px;
+    height: 90px;
 }
 
 .instruction-text {
-  font-size: 30px !important;
+  font-size: 25px !important;
   font-weight: bold !important;
   color: var(--var-listen-page-content) !important;
+  text-align: center;
 }
 
 .google-speak {
