@@ -6,7 +6,7 @@ import LENS from "../../../assets/google-lens.png";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useIonRouter } from "@ionic/react";
 
-const Searchbar = ({ openModal }: any) => {
+const Searchbar = ({ openModal, startCamera }: any) => {
   const router = useIonRouter();
   const handleGoogleFunctions = (func: string) => {
     if (func === "mic") {
@@ -15,7 +15,7 @@ const Searchbar = ({ openModal }: any) => {
     }
 
     if (func === "lens") {
-      console.log("LENS");
+      startCamera();
     }
   };
 

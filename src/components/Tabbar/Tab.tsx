@@ -18,6 +18,14 @@ import { Box, IconButton, Typography } from "@mui/material";
 import "./Tab.css";
 import SearchModal from "../../pages/SearchModal/SearchModal";
 
+import {
+  CameraPreview,
+  CameraPreviewOptions,
+  CameraPreviewPictureOptions,
+} from "@capacitor-community/camera-preview";
+import "@capacitor-community/camera-preview";
+import GoogleLens from "../../pages/GoogleLens/GoogleLens";
+
 const Tab = () => {
   const IonModalRef = useRef<HTMLIonModalElement>(null);
   const [searchText, setSearchText] = useState<string>("");
@@ -41,6 +49,10 @@ const Tab = () => {
 
   const closeModal = () => {
     IonModalRef.current?.dismiss();
+  };
+
+  const startCamera = () => {
+    window.location.href = '/google-lens';
   };
 
   return (
@@ -125,6 +137,7 @@ const Tab = () => {
         closeModal={closeModal}
         searchText={searchText}
         setSearchText={setSearchText}
+        startCamera={startCamera}
       />
     </IonTabs>
   );

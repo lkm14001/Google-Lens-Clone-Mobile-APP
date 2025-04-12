@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
-import { SEARCH_RESULTS, SEARCH_SEGMENTS } from "../../util/constants";
+import { IMAGES, SEARCH_SEGMENTS } from "../../util/constants";
 import Typography from "@mui/material/Typography";
 
 import "./SearchPage.css";
@@ -46,6 +46,11 @@ interface NewsSearchResult {
   favicon: string;
   links: any;
 }
+
+interface LocationState {
+  image: string;
+}
+
 const SearchPage = () => {
   //   type ResultType = TextSearchResult[] | ImageSearchResult[];
   type SegmentType = "All" | "News" | "Videos" | "Images";
@@ -59,6 +64,7 @@ const SearchPage = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [searchResult, setSearchResult] = useState();
   const [selectedSegment, setSelectedSegment] = useState<SegmentType>("All");
+  const [reverseImageSearch, setReverseImageSearch] = useState<string>("");
   const router = useIonRouter();
   const location = useLocation();
 
@@ -119,7 +125,6 @@ const SearchPage = () => {
           channelThumbnail: ele.channelThumbnail[0].url,
         };
       });
-      console.log(videoResults);
       setSearchResult(videoResults);
     } catch (error) {
       console.error(error);
@@ -142,8 +147,6 @@ const SearchPage = () => {
       const imagesArray = result.response.images.map(
         (ele: any) => ele?.image?.url
       );
-      console.log(result.response.images);
-      console.log("imagesArray", imagesArray);
       setSearchResult(imagesArray);
     } catch (error) {
       console.error(error);
@@ -163,7 +166,6 @@ const SearchPage = () => {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log(result);
       setSearchResult(result.data);
     } catch (error) {
       console.error(error);
@@ -183,11 +185,16 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const searchTerm = queryParams.get("query");
-    setSearchText(searchTerm ?? "");
+    const image = (location.state as LocationState).image;
+    if (image) {
+      setReverseImageSearch(image);
+    } else {
+      const queryParams = new URLSearchParams(location.search);
+      const searchTerm = queryParams.get("searchTerm");
+      setSearchText(searchTerm ?? "");
 
-    handleTextSearch(searchTerm ?? "");
+      handleTextSearch(searchTerm ?? "");
+    }
   }, []);
 
   return (
@@ -197,28 +204,48 @@ const SearchPage = () => {
           <IconButton>
             <PiFlaskFill className="header-icons header-flask" />
           </IconButton>
-          <Typography component={"span"} className="header-title">
+          <Typography
+            component={"span"}
+            className="header-title"
+            onTouchEnd={() => router.push("/tabs/home", "back", "replace")}
+          >
             Google
           </Typography>
           <Avatar className="header-icons" src={logo} />
         </Box>
-        <Box component={"div"} className="search-bar">
+        <Box
+          component={"div"}
+          className={`search-bar ${
+            reverseImageSearch ? "reverseimage-search" : ""
+          }`}
+        >
           <IconButton>
             <HiOutlineSearch className="searchbar-icons" />
           </IconButton>
-          <InputBase
-            sx={{ flex: 1, pl: 1 }}
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            className="search-bar-text"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleApiResults(selectedSegment, searchText);
-                Keyboard.hide();
-              }
-            }}
-          />
-          <Box component="div" className="searchbar-google-functions">
+          {reverseImageSearch ? (
+            <Box
+              component={"img"}
+              src={reverseImageSearch}
+              className="searchbar-reverse-image"
+            />
+          ) : (
+            <InputBase
+              sx={{ flex: 1, pl: 1 }}
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              className="search-bar-text"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleApiResults(selectedSegment, searchText);
+                  Keyboard.hide();
+                }
+              }}
+            />
+          )}
+          <Box
+            component="div"
+            className={reverseImageSearch ? "searchbar-google-functions" : ""}
+          >
             <IconButton
               aria-label="Microphone !"
               onClick={(e) => {
@@ -251,26 +278,28 @@ const SearchPage = () => {
             </IconButton>
           </Box>
         </Box>
-        <Box component="div" className="search-segments">
-          <Box component={"div"} className="segment-links">
-            {SEARCH_SEGMENTS.map((ele) => (
-              <Typography
-                key={ele.id}
-                component="span"
-                sx={{ cursor: "pointer" }}
-                className={
-                  selectedSegment === ele.name ? "selected-segment" : ""
-                }
-                onClick={() => {
-                  setSelectedSegment(ele.name as SegmentType);
-                  handleApiResults(ele.name, searchText);
-                }}
-              >
-                {ele.name}
-              </Typography>
-            ))}
+        {!reverseImageSearch && (
+          <Box component="div" className="search-segments">
+            <Box component={"div"} className="segment-links">
+              {SEARCH_SEGMENTS.map((ele) => (
+                <Typography
+                  key={ele.id}
+                  component="span"
+                  sx={{ cursor: "pointer" }}
+                  className={
+                    selectedSegment === ele.name ? "selected-segment" : ""
+                  }
+                  onClick={() => {
+                    setSelectedSegment(ele.name as SegmentType);
+                    handleApiResults(ele.name, searchText);
+                  }}
+                >
+                  {ele.name}
+                </Typography>
+              ))}
+            </Box>
           </Box>
-        </Box>
+        )}
         {/* <Box component="div" className="top-stories">
             {SEARCH_RESULTS.slice(0, 11).map((ele, key) => (
               <>
@@ -280,6 +309,19 @@ const SearchPage = () => {
               </>
             ))}
           </Box> */}
+        {reverseImageSearch && (
+          <>
+            {IMAGES?.map((ele, key) => (
+              <Box component="div" className="image-search-list">
+                <Box
+                  component="img"
+                  className="image-result"
+                  src={(ele as ImageSearchResult) && ele}
+                />
+              </Box>
+            ))}
+          </>
+        )}
         {selectedSegment === "All" && (
           <Box component="div" className="search-list">
             {searchResult &&

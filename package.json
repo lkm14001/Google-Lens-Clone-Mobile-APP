@@ -12,9 +12,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@capacitor-community/camera-preview": "^7.0.1",
     "@capacitor-community/speech-recognition": "^7.0.0",
     "@capacitor/android": "7.2.0",
     "@capacitor/app": "7.0.1",
+    "@capacitor/camera": "^7.0.1",
     "@capacitor/core": "7.2.0",
     "@capacitor/haptics": "7.0.1",
     "@capacitor/ios": "7.2.0",
@@ -23,6 +25,7 @@
     "@capacitor/status-bar": "7.0.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@ionic/pwa-elements": "^3.3.0",
     "@ionic/react": "^8.5.0",
     "@ionic/react-router": "^8.5.0",
     "@mui/material": "^7.0.1",
@@ -30,6 +33,7 @@
     "@types/react-router-dom": "^5.3.3",
     "ionicons": "^7.4.0",
     "react": "19.0.0",
+    "react-cropper": "^2.3.3",
     "react-dom": "19.0.0",
     "react-icons": "^5.5.0",
     "react-router": "^5.3.4",

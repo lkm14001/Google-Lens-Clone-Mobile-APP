@@ -16,7 +16,7 @@ import { useIonRouter } from "@ionic/react";
 
 const GoogleListening = () => {
   const SPEECH_PERMISSION = "isSpeechGranted";
-  const history = useHistory();
+  const router = useIonRouter();
   const [isNativePlatform] = useState<boolean>(Capacitor.isNativePlatform);
   const [speechRecognitionStarted, setSpeechRecognitionStarted] =
     useState<boolean>(true);
@@ -110,9 +110,10 @@ const GoogleListening = () => {
               setSpeechRecognitionStarted(false);
               setInstruction(text.matches[0]);
               setTimeout(() => {
-                history.push("/tabs/home", {
-                  searchText: text.matches && text.matches[0],
-                });
+                router.push(
+                  `/search?searchTerm=${encodeURIComponent(text.matches && text.matches[0] ? text.matches[0] : "")}`,
+                  "forward"
+                );
               }, 500);
               await CapacitorSpeech.stop();
               // Route to /search with the search string in text input (not modal - results page) and results from an api
