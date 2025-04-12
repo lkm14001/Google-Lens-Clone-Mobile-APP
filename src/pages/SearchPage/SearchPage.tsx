@@ -7,7 +7,7 @@ import "./SearchPage.css";
 
 import { PiFlaskFill } from "react-icons/pi";
 import Avatar from "@mui/material/Avatar";
-import { IconButton, InputBase } from "@mui/material";
+import { IconButton, InputBase, Skeleton } from "@mui/material";
 import logo from "../../../assets/Google__G__logo.svg.webp";
 import { HiOutlineSearch } from "react-icons/hi";
 import { IonContent, useIonRouter } from "@ionic/react";
@@ -65,6 +65,7 @@ const SearchPage = () => {
   const [searchResult, setSearchResult] = useState();
   const [selectedSegment, setSelectedSegment] = useState<SegmentType>("All");
   const [reverseImageSearch, setReverseImageSearch] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
   const router = useIonRouter();
   const location = useLocation();
 
@@ -182,12 +183,17 @@ const SearchPage = () => {
     } else if (resultType === SEGMENTS.VIDEOS) {
       handleVideosSearch(searchTerm);
     }
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   useEffect(() => {
-    const image = (location.state as LocationState).image;
-    if (image) {
-      setReverseImageSearch(image);
+    if (location.state) {
+      const image = (location.state as any).image;
+      if (image) {
+        setReverseImageSearch(image);
+      }
     } else {
       const queryParams = new URLSearchParams(location.search);
       const searchTerm = queryParams.get("searchTerm");
@@ -300,7 +306,103 @@ const SearchPage = () => {
             </Box>
           </Box>
         )}
-        {/* <Box component="div" className="top-stories">
+        {loading ? (
+          <>
+            {selectedSegment === "All" ||
+              (selectedSegment === "News" &&
+                [...Array(10).keys()].map((ele) => (
+                  <Box component="div" sx={{ px: 2, py: 1 }}>
+                    <Skeleton
+                      variant="text"
+                      sx={{
+                        fontSize: "1.5rem",
+                        background:
+                          "var(--var-search-page-search-bar-background)",
+                      }}
+                    />
+                    <Skeleton
+                      variant="text"
+                      sx={{
+                        fontSize: "0.8rem",
+                        background:
+                          "var(--var-search-page-search-bar-background)",
+                      }}
+                    />
+                    <Skeleton
+                      variant="text"
+                      sx={{
+                        fontSize: "0.8rem",
+                        background:
+                          "var(--var-search-page-search-bar-background)",
+                      }}
+                    />
+                  </Box>
+                )))}
+            {selectedSegment === "Images" &&
+              [...Array(10).keys()].map((ele) => (
+                <Box
+                  component="div"
+                  sx={{ px: 2, py: 1 }}
+                  className="image-search-list"
+                >
+                  <Skeleton
+                    variant="rounded"
+                    // width={'210'}
+                    height={100}
+                    className="image-result"
+                    sx={{
+                      background:
+                        "var(--var-search-page-search-bar-background)",
+                    }}
+                  />
+                </Box>
+              ))}
+            {selectedSegment === "Videos" && (
+              <Box component={"div"} className="videos-list">
+                {[...Array(10).keys()].map((ele) => (
+                  <Box component={"div"} className="videos-list-item">
+                    <Skeleton variant="rounded" className="video-thumbnail" />
+                    <Box component="div" className="video-details">
+                      <Skeleton
+                        variant="text"
+                        sx={{
+                          fontSize: "1.5rem",
+                          background:
+                            "var(--var-search-page-search-bar-background)",
+                        }}
+                        className="video-title"
+                      />
+                      <Skeleton
+                        variant="text"
+                        sx={{
+                          fontSize: "0.8rem",
+                          background:
+                            "var(--var-search-page-search-bar-background)",
+                        }}
+                        className="video-description"
+                      />
+                      <Box component={"div"} className="channel-details">
+                        <Skeleton variant="circular" className="channel-img" />
+                        <Skeleton
+                          variant="text"
+                          sx={{
+                            fontSize: "0.8rem",
+                            background:
+                              "var(--var-search-page-search-bar-background)",
+                              width: '100%'
+                          }}
+                          className="channel-views"
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+                ))}
+              </Box>
+            )}
+          </>
+        ) : (
+          <>
+            {/* <Box component="div" className="top-stories">
             {SEARCH_RESULTS.slice(0, 11).map((ele, key) => (
               <>
                 <Box component={"div"} className="top-stories-card">
@@ -309,120 +411,134 @@ const SearchPage = () => {
               </>
             ))}
           </Box> */}
-        {reverseImageSearch && (
-          <>
-            {IMAGES?.map((ele, key) => (
-              <Box component="div" className="image-search-list">
-                <Box
-                  component="img"
-                  className="image-result"
-                  src={(ele as ImageSearchResult) && ele}
-                />
-              </Box>
-            ))}
-          </>
-        )}
-        {selectedSegment === "All" && (
-          <Box component="div" className="search-list">
-            {searchResult &&
-              (searchResult as TextSearchResult[]).map((ele, key) => (
-                <Box
-                  component="a"
-                  className="individual-search-result"
-                  href={ele.url}
-                >
-                  <Typography
-                    component="a"
-                    href={ele.url}
-                    className="result-title"
-                  >
-                    {"title" in ele && ele.title}
-                  </Typography>
-                  <Typography component="span" className="result-description">
-                    {"description" in ele && ele.description}
-                  </Typography>
-                </Box>
-              ))}
-          </Box>
-        )}
-
-        {selectedSegment === "Images" && (
-          <>
-            {searchResult &&
-              (searchResult as ImageSearchResult[])?.map((ele, key) => (
-                <Box component="div" className="image-search-list">
-                  <Box
-                    component="img"
-                    className="image-result"
-                    src={(ele as ImageSearchResult) && ele}
-                  />
-                </Box>
-              ))}
-          </>
-        )}
-
-        {selectedSegment === "Videos" && (
-          <Box component={"div"} className="videos-list">
-            {searchResult &&
-              (searchResult as VideoSearchResult[]).map((ele) => (
-                <Box component={"div"} className="videos-list-item">
-                  <Box
-                    component="img"
-                    src={ele.thumbnail}
-                    className="video-thumbnail"
-                  />
-                  <Box component="div" className="video-details">
-                    <Typography component="span" className="video-title">
-                      {ele.title}
-                    </Typography>
-                    <Typography component="span" className="video-description">
-                      {ele.description}
-                    </Typography>
-                    <Box component={"div"} className="channel-details">
-                      <Box
-                        component="img"
-                        className="channel-img"
-                        src={ele.channelThumbnail}
-                      />
-                      <Typography component={"span"} className="channel-views">
-                        {ele.views}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-              ))}
-          </Box>
-        )}
-
-        {selectedSegment === "News" && (
-          <Box component="div" className="search-list">
-            {searchResult &&
-              (searchResult as NewsSearchResult[]).map((ele, key) => (
-                <Box
-                  component="a"
-                  className="individual-search-result"
-                  href={ele.url}
-                >
-                  <Typography
-                    component="a"
-                    href={ele.url}
-                    className="result-title"
-                  >
-                    {"title" in ele && ele.title}
-                  </Typography>
-                  <Box component={"div"} className="news-desctiption">
+            {reverseImageSearch && (
+              <>
+                {IMAGES?.map((ele, key) => (
+                  <Box component="div" className="image-search-list">
                     <Box
                       component="img"
-                      className="news-favicon"
-                      src={ele.favicon ?? ""}
+                      className="image-result"
+                      src={(ele as ImageSearchResult) && ele}
                     />
-                    <Typography component="span" className="result-description">
-                      {"description" in ele && ele.description}
-                    </Typography>
                   </Box>
-                </Box>
-              ))}
-          </Box>
+                ))}
+              </>
+            )}
+            {selectedSegment === "All" && (
+              <Box component="div" className="search-list">
+                {searchResult &&
+                  (searchResult as TextSearchResult[]).map((ele, key) => (
+                    <Box
+                      component="a"
+                      className="individual-search-result"
+                      href={ele.url}
+                    >
+                      <Typography
+                        component="a"
+                        href={ele.url}
+                        className="result-title"
+                      >
+                        {"title" in ele && ele.title}
+                      </Typography>
+                      <Typography
+                        component="span"
+                        className="result-description"
+                      >
+                        {"description" in ele && ele.description}
+                      </Typography>
+                    </Box>
+                  ))}
+              </Box>
+            )}
+
+            {selectedSegment === "Images" && (
+              <>
+                {searchResult &&
+                  (searchResult as ImageSearchResult[])?.map((ele, key) => (
+                    <Box component="div" className="image-search-list">
+                      <Box
+                        component="img"
+                        className="image-result"
+                        src={(ele as ImageSearchResult) && ele}
+                      />
+                    </Box>
+                  ))}
+              </>
+            )}
+
+            {selectedSegment === "Videos" && (
+              <Box component={"div"} className="videos-list">
+                {searchResult &&
+                  (searchResult as VideoSearchResult[]).map((ele) => (
+                    <Box component={"div"} className="videos-list-item">
+                      <Box
+                        component="img"
+                        src={ele.thumbnail}
+                        className="video-thumbnail"
+                      />
+                      <Box component="div" className="video-details">
+                        <Typography component="span" className="video-title">
+                          {ele.title}
+                        </Typography>
+                        <Typography
+                          component="span"
+                          className="video-description"
+                        >
+                          {ele.description}
+                        </Typography>
+                        <Box component={"div"} className="channel-details">
+                          <Box
+                            component="img"
+                            className="channel-img"
+                            src={ele.channelThumbnail}
+                          />
+                          <Typography
+                            component={"span"}
+                            className="channel-views"
+                          >
+                            {ele.views}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </Box>
+                  ))}
+              </Box>
+            )}
+
+            {selectedSegment === "News" && (
+              <Box component="div" className="search-list">
+                {searchResult &&
+                  (searchResult as NewsSearchResult[]).map((ele, key) => (
+                    <Box
+                      component="a"
+                      className="individual-search-result"
+                      href={ele.url}
+                    >
+                      <Typography
+                        component="a"
+                        href={ele.url}
+                        className="result-title"
+                      >
+                        {"title" in ele && ele.title}
+                      </Typography>
+                      <Box component={"div"} className="news-desctiption">
+                        <Box
+                          component="img"
+                          className="news-favicon"
+                          src={ele.favicon ?? ""}
+                        />
+                        <Typography
+                          component="span"
+                          className="result-description"
+                        >
+                          {"description" in ele && ele.description}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  ))}
+              </Box>
+            )}
+          </>
         )}
       </Box>
     </IonContent>
