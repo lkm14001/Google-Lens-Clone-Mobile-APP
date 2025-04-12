@@ -65,52 +65,71 @@ To run this project, you will need to add the following environment variables to
 
 
 ## File Structure
-
-# src
-
-* [components/](.\src\components)
-  * [GoogleFunction/](.\src\components\GoogleFunction)
-    * [GoogleFunction.css](.\src\components\GoogleFunction\GoogleFunction.css)
-    * [GoogleFunction.tsx](.\src\components\GoogleFunction\GoogleFunction.tsx)
-  * [NewsCard/](.\src\components\NewsCard)
-    * [NewsCard.css](.\src\components\NewsCard\NewsCard.css)
-    * [NewsCard.tsx](.\src\components\NewsCard\NewsCard.tsx)
-  * [Searchbar/](.\src\components\Searchbar)
-    * [Searchbar.css](.\src\components\Searchbar\Searchbar.css)
-    * [Searchbar.tsx](.\src\components\Searchbar\Searchbar.tsx)
-  * [Tabbar/](.\src\components\Tabbar)
-    * [Tab.css](.\src\components\Tabbar\Tab.css)
-    * [Tab.tsx](.\src\components\Tabbar\Tab.tsx)
-* [pages/](.\src\pages)
-  * [GoogleLens/](.\src\pages\GoogleLens)
-    * [GoogleLens.css](.\src\pages\GoogleLens\GoogleLens.css)
-    * [GoogleLens.tsx](.\src\pages\GoogleLens\GoogleLens.tsx)
-  * [GoogleListening/](.\src\pages\GoogleListening)
-    * [GoogleListening.css](.\src\pages\GoogleListening\GoogleListening.css)
-    * [GoogleListening.tsx](.\src\pages\GoogleListening\GoogleListening.tsx)
-  * [Home/](.\src\pages\Home)
-    * [Home.css](.\src\pages\Home\Home.css)
-    * [Home.tsx](.\src\pages\Home\Home.tsx)
-  * [PhotoCrop/](.\src\pages\PhotoCrop)
-    * [PhotoCrop.css](.\src\pages\PhotoCrop\PhotoCrop.css)
-    * [PhotoCrop.tsx](.\src\pages\PhotoCrop\PhotoCrop.tsx)
-  * [SearchModal/](.\src\pages\SearchModal)
-    * [SearchModal.css](.\src\pages\SearchModal\SearchModal.css)
-    * [SearchModal.tsx](.\src\pages\SearchModal\SearchModal.tsx)
-  * [SearchPage/](.\src\pages\SearchPage)
-    * [SearchPage.css](.\src\pages\SearchPage\SearchPage.css)
-    * [SearchPage.tsx](.\src\pages\SearchPage\SearchPage.tsx)
-* [theme/](.\src\theme)
-  * [variables.css](.\src\theme\variables.css)
-* [util/](.\src\util)
-  * [hooks/](.\src\util\hooks)
-    * [useNativeCamera.tsx](.\src\util\hooks\useNativeCamera.tsx)
-  * [constants.ts](.\src\util\constants.ts)
-* [App.test.tsx](.\src\App.test.tsx)
-* [App.tsx](.\src\App.tsx)
-* [main.tsx](.\src\main.tsx)
-* [setupTests.ts](.\src\setupTests.ts)
-* [vite-env.d.ts](.\src\vite-env.d.ts)
+```
+┣ 📂android
+┣ 📂assets
+┣ 📂cypress
+┣ 📂dist
+┣ 📂icons
+┣ 📂ios
+┣ 📂public
+┣ 📂src
+┃ ┣ 📂components
+┃ ┃ ┣ 📂GoogleFunction
+┃ ┃ ┃ ┣ 📜GoogleFunction.css
+┃ ┃ ┃ ┗ 📜GoogleFunction.tsx
+┃ ┃ ┣ 📂NewsCard
+┃ ┃ ┃ ┣ 📜NewsCard.css
+┃ ┃ ┃ ┗ 📜NewsCard.tsx
+┃ ┃ ┣ 📂Searchbar
+┃ ┃ ┃ ┣ 📜Searchbar.css
+┃ ┃ ┃ ┗ 📜Searchbar.tsx
+┃ ┃ ┗ 📂Tabbar
+┃ ┃   ┣ 📜Tab.css
+┃ ┃   ┗ 📜Tab.tsx
+┃ ┣ 📂pages
+┃ ┃ ┣ 📂GoogleLens
+┃ ┃ ┃ ┣ 📜GoogleLens.css
+┃ ┃ ┃ ┗ 📜GoogleLens.tsx
+┃ ┃ ┣ 📂GoogleListening
+┃ ┃ ┃ ┣ 📜GoogleListening.css
+┃ ┃ ┃ ┗ 📜GoogleListening.tsx
+┃ ┃ ┣ 📂Home
+┃ ┃ ┃ ┣ 📜Home.css
+┃ ┃ ┃ ┗ 📜Home.tsx
+┃ ┃ ┣ 📂PhotoCrop
+┃ ┃ ┃ ┣ 📜PhotoCrop.css
+┃ ┃ ┃ ┗ 📜PhotoCrop.tsx
+┃ ┃ ┣ 📂SearchModal
+┃ ┃ ┃ ┣ 📜SearchModal.css
+┃ ┃ ┃ ┗ 📜SearchModal.tsx
+┃ ┃ ┗ 📂SearchPage
+┃ ┃   ┣ 📜SearchPage.css
+┃ ┃   ┗ 📜SearchPage.tsx
+┃ ┣ 📂theme
+┃ ┃ ┗ 📜variables.css
+┃ ┣ 📂util
+┃ ┃ ┣ 📂hooks
+┃ ┃ ┃ ┗ 📜useNativeCamera.tsx
+┃ ┃ ┗ 📜constants.ts
+┃ ┣ 📜App.test.tsx
+┃ ┣ 📜App.tsx
+┃ ┣ 📜main.tsx
+┃ ┣ 📜setupTests.ts
+┃ ┗ 📜vite-env.d.ts
+┣ 📜.browserslistrc
+┣ 📜.env
+┣ 📜.gitignore
+┣ 📜capacitor.config.ts
+┣ 📜cypress.config.ts
+┣ 📜eslint.config.js
+┣ 📜index.html
+┣ 📜ionic.config.json
+┣ 📜package.json
+┣ 📜tsconfig.json
+┣ 📜tsconfig.node.json
+┗ 📜vite.config.ts
+```
 
 ## Features that will be implemented in future
 Will Add A Camera Preview for the Google Lens app (will use a Custom Camera Preview instead of Native Camera View)
