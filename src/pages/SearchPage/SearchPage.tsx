@@ -193,13 +193,15 @@ const SearchPage = () => {
       const image = (location.state as any).image;
       if (image) {
         setReverseImageSearch(image);
+        setLoading(false);
       }
     } else {
       const queryParams = new URLSearchParams(location.search);
       const searchTerm = queryParams.get("searchTerm");
       setSearchText(searchTerm ?? "");
-
+      setLoading(true);
       handleTextSearch(searchTerm ?? "");
+      setLoading(false);
     }
   }, []);
 
