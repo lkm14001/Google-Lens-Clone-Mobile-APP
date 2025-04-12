@@ -80,6 +80,7 @@ const SearchPage = () => {
   };
 
   const handleTextSearch = async (searchTerm: string) => {
+    setLoading(true);
     const url = `${import.meta.env.VITE_TEXT_SEARCH}?query=${encodeURIComponent(
       searchTerm
     )}&limit=20&related_keywords=true`;
@@ -95,12 +96,14 @@ const SearchPage = () => {
       const response = await fetch(url, options);
       const result = await response.json();
       setSearchResult(result.results);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleVideosSearch = async (searchTerm: string) => {
+    setLoading(true);
     const url = `${
       import.meta.env.VITE_VIDEO_SEARCH
     }?query=${searchTerm}&order=relevance&type=video`;
@@ -127,12 +130,14 @@ const SearchPage = () => {
         };
       });
       setSearchResult(videoResults);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleImagesSearch = async (searchTerm: string) => {
+    setLoading(true);
     const url = `${import.meta.env.VITE_IMAGE_SEARCH}?q=${searchTerm}&hl=en`;
     const options = {
       method: "GET",
@@ -149,12 +154,14 @@ const SearchPage = () => {
         (ele: any) => ele?.image?.url
       );
       setSearchResult(imagesArray);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleNewsSearch = async (searchTerm: string) => {
+    setLoading(true);
     const url = `${import.meta.env.VITE_NEWS_SEARCH}?query=${searchTerm}`;
     const options = {
       method: "GET",
@@ -168,6 +175,7 @@ const SearchPage = () => {
       const response = await fetch(url, options);
       const result = await response.json();
       setSearchResult(result.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -183,9 +191,6 @@ const SearchPage = () => {
     } else if (resultType === SEGMENTS.VIDEOS) {
       handleVideosSearch(searchTerm);
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
   };
 
   useEffect(() => {
@@ -199,14 +204,13 @@ const SearchPage = () => {
       const queryParams = new URLSearchParams(location.search);
       const searchTerm = queryParams.get("searchTerm");
       setSearchText(searchTerm ?? "");
-      setLoading(true);
       handleTextSearch(searchTerm ?? "");
-      setLoading(false);
     }
   }, []);
 
   return (
     <IonContent>
+      <>{console.log(reverseImageSearch)}</>
       <Box component="div" className="search-page-wrapper">
         <Box component={"div"} className="search-page-header">
           <IconButton>
@@ -391,7 +395,7 @@ const SearchPage = () => {
                             fontSize: "0.8rem",
                             background:
                               "var(--var-search-page-search-bar-background)",
-                              width: '100%'
+                            width: "100%",
                           }}
                           className="channel-views"
                         />
