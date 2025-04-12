@@ -39,10 +39,28 @@
   border: 1px solid var(--var-search-page-search-bar-border);
 }
 
+.reverseimage-search {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .searchbar-icons {
   width: 30px !important;
   height: 30px !important;
   color: var(--var-search-page-content-inactive);
+}
+
+.searchbar-reverse-image {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 5px;
+  background-size: 100% 100% !important;
+}
+
+.searchbar-google-functions {
+  flex:1;
+  display: flex;
+  justify-content: end;
 }
 
 .search-bar-text {

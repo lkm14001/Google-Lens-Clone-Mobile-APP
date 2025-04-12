@@ -44,6 +44,8 @@ import { useEffect } from "react";
 
 import { App as CapApp } from "@capacitor/app";
 import { PluginListenerHandle } from "@capacitor/core";
+import GoogleLens from "./pages/GoogleLens/GoogleLens";
+import PhotoCrop from "./pages/PhotoCrop/PhotoCrop";
 
 setupIonicReact();
 
@@ -68,6 +70,7 @@ const App: React.FC = () => {
         <Route path="/tabs" component={Tab} />
         <Route path="/listen" component={GoogleListening} />
         <Route path="/search" component={SearchPage} />
+        <Route path="/photo-crop" component={PhotoCrop} />
 
         <Redirect exact from="/" to="/tabs/home" />
         <Redirect exact from="/tabs" to="/tabs/home" />
